@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JacketHub - Your Premium Jacket Destination</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+        }
+
+        .header {
+            background-color: #2c3e50;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 600;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 50px;
+            margin-right: 10px;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #3498db;
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background-color: #ffffff;
+            border-radius: 25px;
+            padding: 5px 15px;
+            margin-right: 20px;
+            width: 400px;
+        }
+
+        .search-bar input {
+            border: none;
+            outline: none;
+            padding: 8px;
+            width: 100%;
+            font-size: 16px;
+        }
+
+        .search-bar i {
+            color: #2c3e50;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: #e74c3c;
+            color: #ffffff;
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 12px;
+        }
+
+        .welcome-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #ffffff;
+            margin-top: 80px;
+        }
+
+        .welcome-content h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .welcome-content p {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            background-color: #3498db;
+            color: #ffffff;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #2980b9;
+        }
+
+        .main-content {
+            padding: 40px;
+        }
+
+        .section-title {
+            font-size: 36px;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: #ffffff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-name {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .product-description {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .product-price {
+            font-size: 22px;
+            font-weight: 600;
+            color: #e74c3c;
+            margin-bottom: 15px;
+        }
+
+        .product-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .buy-now, .add-to-cart {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .buy-now {
+            background-color: #3498db;
+            color: #ffffff;
+        }
+
+        .buy-now:hover {
+            background-color: #2980b9;
+        }
+
+        .add-to-cart {
+            background-color: #2ecc71;
+            color: #ffffff;
+        }
+
+        .add-to-cart:hover {
+            background-color: #27ae60;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background-color: #ffffff;
+            margin: 10% auto;
+            padding: 30px;
+            width: 400px;
+            border-radius: 15px;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 15px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #aaa;
+            transition: color 0.3s ease;
+        }
+
+        .close:hover {
+            color: #000;
+        }
+
+        .modal-content h2 {
+            font-size: 28px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .modal-content input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .modal-content button {
+            width: 100%;
+            padding: 12px;
+            background-color: #3498db;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        .modal-content button:hover {
+            background-color: #2980b9;
+        }
+
+        .social-login {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .social-login button {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+        }
+
+        .google-login {
+            background-color: #db4437;
+            color: #ffffff;
+        }
+
+        .google-login:hover {
+            background-color: #c1351d;
+        }
+
+        .facebook-login {
+            background-color: #3b5998;
+            color: #ffffff;
+        }
+
+        .facebook-login:hover {
+            background-color: #2d4373;
+        }
+
+        .social-login i {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+
+        .footer {
+            background-color: #2c3e50;
+            color: #fff;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #3498db;
+        }
+
+        .social-icons {
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            color: #fff;
+            font-size: 24px;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #3498db;
+        }
+
+        #cartModal .modal-content {
+            width: 600px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .cart-item-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            margin-right: 15px;
+        }
+
+        .cart-item-details h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            font-weight: 600;
+            color: #e74c3c;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-btn {
+            background-color: #3498db;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .cart-total {
+            font-size: 24px;
+            font-weight: 600;
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        .checkout-btn {
+            background-color: #2ecc71;
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            float: right;
+        }
+
+        .checkout-btn:hover {
+            background-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="logo">
+            <img src="https://cdn-icons-png.flaticon.com/512/2806/2806045.png" alt="JacketHub Logo">
+            JacketHub
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search for jackets...">
+            <i class="fas fa-search"></i>
+        </div>
+        <nav class="nav-links">
+            <a href="#" onclick="showLogin()">Login</a>
+            <a href="#products">Products</a>
+            <a href="#" onclick="showCart()">
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
+            </a>
+        </nav>
+    </header>
+
+    <section class="welcome-section">
+        <div class="welcome-content">
+            <h1>Welcome to JacketHub</h1>
+            <p>Discover premium jackets for every style and season</p>
+            <a href="#products" class="cta-button">Explore Jackets</a>
+        </div>
+    </section>
+
+    <main class="main-content">
+        <h2 class="section-title" id="products">Our Featured Jackets</h2>
+        <div class="product-grid" id="productGrid">
+            <!-- Product cards will be dynamically added here -->
+        </div>
+    </main>
+
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2>Login to JacketHub</h2>
+            <input type="text" placeholder="Email">
+            <input type="password" placeholder="Password">
+            <button onclick="login()">Login</button>
+            <div class="social-login">
+                <button class="google-login" onclick="googleLogin()"><i class="fab fa-google"></i> Login with Google</button>
+                <button class="facebook-login" onclick="facebookLogin()"><i class="fab fa-facebook-f"></i> Login with Facebook</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('cartModal')">&times;</span>
+            <h2>Your Cart</h2>
+            <div id="cartItems">
+                <!-- Cart items will be dynamically added here -->
+            </div>
+            <div class="cart-total">Total: $<span id="cartTotal">0.00</span></div>
+            <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
+        </div>
+    </div>
+
+    <footer class="footer">
+    <p>&copy; 2024 JacketHub. All rights reserved.</p>
+    <div class="footer-links">
+        <a href="#">About Us</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">FAQ</a>
+        <a href="#">Contact Us</a>
+    </div>
+    <div class="social-icons">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+    </div>
+</footer>
+
+<script>
+    // JavaScript code
+    const jackets = [
+        { id: 1, name: "Classic Leather Jacket", description: "Timeless style for any occasion", price: 199.99, image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80" },
+        { id: 2, name: "Waterproof Hiking Jacket", description: "Stay dry on your outdoor adventures", price: 149.99, image: "https://images.unsplash.com/photo-1547949003-9792a18a2601?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" },
+        { id: 3, name: "Bomber Jacket", description: "Sleek and stylish urban wear", price: 129.99, image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=736&q=80" },
+        { id: 4, name: "Denim Jacket", description: "Casual cool for everyday wear", price: 89.99, image: "https://images.unsplash.com/photo-1495105787522-5334e3ffa0ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" },
+        { id: 5, name: "Puffer Jacket", description: "Stay warm in style", price: 179.99, image: "https://images.unsplash.com/photo-1609803384069-19f3e5a70e75?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
+        { id: 6, name: "Windbreaker", description: "Light protection for breezy days", price: 79.99, image: "https://images.unsplash.com/photo-1604025677169-6b07c4b5d3c3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80" },
+        { id: 7, name: "Fleece Jacket", description: "Cozy comfort for cool weather", price: 69.99, image: "https://images.unsplash.com/photo-1608063615781-e2ef8c73d114?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
+        { id: 8, name: "Motorcycle Jacket", description: "Protect yourself in style", price: 249.99, image: "https://images.unsplash.com/photo-1559551409-dadc959f76b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80" },
+        { id: 9, name: "Trench Coat", description: "Elegant protection from the elements", price: 219.99, image: "https://images.unsplash.com/photo-1578948856697-db91d246b7b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
+        { id: 10, name: "Ski Jacket", description: "Hit the slopes in style", price: 299.99, image: "https://images.unsplash.com/photo-1609250291996-fdebe6020a8f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" },
+        { id: 11, name: "Varsity Jacket", description: "Show your team spirit", price: 109.99, image: "https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" },
+        { id: 12, name: "Rain Jacket", description: "Stay dry in style", price: 89.99, image: "https://images.unsplash.com/photo-1605908502724-9093a79a1b39?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
+        { id: 13, name: "Parka", description: "Ultimate protection for harsh winters", price: 279.99, image: "https://images.unsplash.com/photo-1539533018447-63fcce2678e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
+        { id: 14, name: "Blazer", description: "Versatile style for work and play", price: 159.99, image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" },
+        { id: 15, name: "Quilted Jacket", description: "Lightweight warmth for chilly days", price: 129.99, image: "https://images.unsplash.com/photo-1548126032-079a0fb0099d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
+        { id: 16, name: "Track Jacket", description: "Sporty comfort for active lifestyles", price: 69.99, image: "https://images.unsplash.com/photo-1515664069236-68a74c369d97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" },
+        { id: 17, name: "Shearling Jacket", description: "Cozy luxury for cold weather", price: 349.99, image: "https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=795&q=80" },
+        { id: 18, name: "Utility Jacket", description: "Functional style with plenty of pockets", price: 139.99, image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=736&q=80" },
+        { id: 19, name: "Anorak", description: "Versatile protection for outdoor activities", price: 119.99, image: "https://images.unsplash.com/photo-1539533018447-63fcce2678e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" },
+        { id: 20, name: "Peacoat", description: "Classic warmth with timeless style", price: 199.99, image: "https://images.unsplash.com/photo-1485727749690-d091e8284ef3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" },
+    ];
+
+    let cart = [];
+
+    function createProductCard(jacket) {
+        return `
+            <div class="product-card">
+                <img src="${jacket.image}" alt="${jacket.name}">
+                <div class="product-info">
+                    <div class="product-name">${jacket.name}</div>
+                    <div class="product-description">${jacket.description}</div>
+                    <div class="product-price">$${jacket.price.toFixed(2)}</div>
+                    <div class="product-buttons">
+                        <button class="buy-now" onclick="buyNow(${jacket.id})">Buy Now</button>
+                        <button class="add-to-cart" onclick="addToCart(${jacket.id})">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    function loadProducts() {
+        const grid = document.getElementById('productGrid');
+        jackets.forEach(jacket => {
+            grid.innerHTML += createProductCard(jacket);
+        });
+    }
+
+    function showLogin() {
+        document.getElementById('loginModal').style.display = 'block';
+    }
+
+    function closeModal(modalId) {
+        document.getElementById(modalId).style.display = 'none';
+    }
+
+    function login() {
+        alert('Login functionality to be implemented');
+        closeModal('loginModal');
+    }
+
+    function googleLogin() {
+        alert('Google login to be implemented');
+    }
+
+    function facebookLogin() {
+        alert('Facebook login to be implemented');
+    }
+
+    function addToCart(jacketId) {
+        const jacket = jackets.find(j => j.id === jacketId);
+        const existingItem = cart.find(item => item.id === jacketId);
+
+        if (existingItem) {
+            existingItem.quantity += 1;
+        } else {
+            cart.push({ ...jacket, quantity: 1 });
+        }
+
+        updateCartCount();
+        alert(`${jacket.name} added to cart!`);
+    }
+
+    function updateCartCount() {
+        const cartCount = document.querySelector('.cart-count');
+        const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+        cartCount.textContent = totalItems;
+    }
+
+    function showCart() {
+        const cartItems = document.getElementById('cartItems');
+        cartItems.innerHTML = '';
+
+        if (cart.length === 0) {
+            cartItems.innerHTML = '<p>Your cart is empty</p>';
+        } else {
+            cart.forEach(item => {
+                cartItems.innerHTML += `
+                    <div class="cart-item">
+                        <div class="cart-item-info">
+                            <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                            <div class="cart-item-details">
+                                <h3>${item.name}</h3>
+                                <p class="cart-item-price">$${item.price.toFixed(2)}</p>
+                            </div>
+                        </div>
+                        <div class="cart-item-quantity">
+                            <button class="quantity-btn" onclick="updateQuantity(${item.id}, -1)">-</button>
+                            <span>${item.quantity}</span>
+                            <button class="quantity-btn" onclick="updateQuantity(${item.id}, 1)">+</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        updateCartTotal();
+        document.getElementById('cartModal').style.display = 'block';
+    }
+
+    function updateQuantity(jacketId, change) {
+        const item = cart.find(item => item.id === jacketId);
+        item.quantity += change;
+
+        if (item.quantity <= 0) {
+            cart = cart.filter(item => item.id !== jacketId);
+        }
+
+        updateCartCount();
+        showCart();
+    }
+
+    function updateCartTotal() {
+        const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        document.getElementById('cartTotal').textContent = total.toFixed(2);
+    }
+
+    function buyNow(jacketId) {
+        const jacket = jackets.find(j => j.id === jacketId);
+        alert(`Proceeding to checkout for ${jacket.name}. Total: $${jacket.price.toFixed(2)}`);
+        // Implement checkout process
+    }
+
+    function checkout() {
+        if (cart.length === 0) {
+            alert('Your cart is empty');
+            return;
+        }
+
+        const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        alert(`Proceeding to checkout. Total: $${total.toFixed(2)}`);
+        // Implement checkout process
+        cart = [];
+        updateCartCount();
+        closeModal('cartModal');
+    }
+
+    // Search functionality
+    const searchInput = document.querySelector('.search-bar input');
+    searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        const filteredJackets = jackets.filter(jacket => 
+            jacket.name.toLowerCase().includes(searchTerm) || 
+            jacket.description.toLowerCase().includes(searchTerm)
+        );
+        
+        const grid = document.getElementById('productGrid');
+        grid.innerHTML = '';
+        filteredJackets.forEach(jacket => {
+            grid.innerHTML += createProductCard(jacket);
+        });
+    });
+
+    // Load products when the page loads
+    window.onload = loadProducts;
+</script>
+</body>
+</html>
